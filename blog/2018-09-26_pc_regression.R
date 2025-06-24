@@ -31,10 +31,10 @@ pcr.fit = pcr(Salary ~ ., data = Hitters, subset = train,
 validationplot(pcr.fit, val.type = "MSEP")
 
 
-cverr <- MSEP(pcrfit)$val[2,,]
+cverr <- MSEP(pcr.fit)$val[2,,]
 imin <- which.min(cverr)
 if (imin > 1) {
-    predictions <- c(predict(pcrfit, data.frame(X_test_mat), ncomp = imin - 1))
+    predictions <- c(predict(pcr.fit, data.frame(X_test_mat), ncomp = imin - 1))
     MSE_mat[i, 2 + length(rat) + 3] <- MSE(predictions, signal_test)
     support_mat[i, 2 + length(rat) + 3] <- p
 } else {
